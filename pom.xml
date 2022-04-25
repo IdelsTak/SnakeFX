@@ -32,7 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>com.github.idelstak.snakefx.Main</exec.mainClass>
+        <exec.mainClass>com.github.idelstak.snakefx.Start</exec.mainClass>
         <license.maven.plugin.version>4.2.rc2</license.maven.plugin.version>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
@@ -63,7 +63,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.github.idelstak.spellchecker.Main</mainClass>
+                            <mainClass>com.github.idelstak.snakefx.Start</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
