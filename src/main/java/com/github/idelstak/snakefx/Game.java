@@ -229,19 +229,9 @@ public class Game extends Main {
                     direction = Direction.RIGHT;
 
             }
-            /*if (key.getCode() == UpKey) {
-            direction = Direction.UP;
-            } else if (key.getCode() == LeftKey) {
-            direction = Direction.LEFT;
-            } else if (key.getCode() == DownKey) {
-            direction = Direction.DOWN;
-            } else if (key.getCode() == RightKey) {
-            direction = Direction.RIGHT;
-            }*/
-
         });
         stage.setScene(scene);
-        stage.setTitle("snake");
+        stage.setTitle("SnakeFX");
         stage.setResizable(false);
         stage.show();
         startGame();
