@@ -75,7 +75,6 @@ public class Game extends Main {
     int points = 0;
 
     public Parent game() {
-        //zmiana trudnosci
         switch (difficulty) {
             case EASY ->
                 speed = Duration.seconds(0.2);
@@ -89,16 +88,14 @@ public class Game extends Main {
         root.setPrefSize(width, height);
         Label score = new Label("Score :" + points);
 
-        //inicjacja snake'a
         Group snakeBody = new Group();
         snake = snakeBody.getChildren();
-        //stworzenie jedzenia
+
         Rectangle food = new Rectangle(blockSize, blockSize);
         food.setFill(Color.BLUE);
         food.setTranslateX((int) (Math.random() * width) / blockSize * blockSize);
         food.setTranslateY((int) (Math.random() * height) / blockSize * blockSize);
 
-        //Tworzenie pojedyńczych klatek gry
         KeyFrame frame = new KeyFrame(speed, event -> {
             if (!running) {
                 return;
@@ -109,7 +106,6 @@ public class Game extends Main {
             double tailX = head.getTranslateX();
             double tailY = head.getTranslateY();
 
-            //zmiana kierunku
             switch (direction) {
                 case UP -> {
                     head.setTranslateX(snake.get(0).getTranslateX());
@@ -134,7 +130,6 @@ public class Game extends Main {
                 snake.add(0, head);
             }
 
-            //Przegrana przez wjechanie w ciało
             for (Node rect : snake) {
                 if (rect != head && head.getTranslateX() == rect.getTranslateX()
                         && head.getTranslateY() == rect.getTranslateY()) {
@@ -143,14 +138,12 @@ public class Game extends Main {
                     break;
                 }
             }
-            //Przegrana przez wjechanie w ścianę
             if (head.getTranslateX() < 0 || head.getTranslateX() >= width
                     || head.getTranslateY() < 0 || head.getTranslateY() >= height) {
                 score.setText("Score :" + 0);
                 restartGame();
             }
 
-            //Zebranie jedzenia
             if (head.getTranslateX() == food.getTranslateX()
                     && head.getTranslateY() == food.getTranslateY()) {
                 food.setTranslateX((int) (Math.random() * width) / blockSize * blockSize);
@@ -159,7 +152,6 @@ public class Game extends Main {
                 points++;
                 points += extraPoints;
 
-                //losowy kolor i extra score
                 int randomColor = random.nextInt(4);
                 switch (randomColor) {
                     case 0 ->
@@ -176,7 +168,6 @@ public class Game extends Main {
                     }
                 }
 
-                //Dodaje rectangle do snake'a
                 Rectangle rect = new Rectangle(blockSize, blockSize);
                 rect.setTranslateX(tailX);
                 rect.setTranslateY(tailY);
@@ -215,7 +206,7 @@ public class Game extends Main {
     @Override
     public void start(Stage stage) throws IOException {
         Scene scene = new Scene(game());
-        //Detekcja klawiszy
+
         scene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
 
             switch (key.getCode()) {
