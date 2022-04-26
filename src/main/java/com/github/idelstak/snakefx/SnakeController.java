@@ -36,8 +36,4 @@ class SnakeController {
         return viewBuilder.build();
     }
 
-    String getTitle() {
-        return "SnakeFX";
-    }
-
 }
