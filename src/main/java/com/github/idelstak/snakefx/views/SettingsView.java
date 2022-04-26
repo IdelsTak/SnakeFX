@@ -123,7 +123,6 @@ public class SettingsView extends DialogPane {
         var upLink = new Hyperlink();
 
         upLink.textProperty().bind(Bindings.createStringBinding(() -> settings.getUpKeyCode().toString(), settings.upKeyCodeProperty()));
-
         upLink.setOnAction(e -> {
             var alert = new Alert(Alert.AlertType.CONFIRMATION);
 
