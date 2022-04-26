@@ -24,9 +24,14 @@ package com.github.idelstak.snakefx.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -52,7 +57,7 @@ public class MainViewController {
     @FXML
     void initialize() {
         System.out.println("Loaded fxml file from: " + location);
-        
+
         exitButton.visibleProperty().bind(settingsButton.visibleProperty());
         backButton.visibleProperty().bind(settingsButton.visibleProperty().not());
         saveButton.visibleProperty().bind(exitButton.visibleProperty().not());
@@ -72,6 +77,21 @@ public class MainViewController {
 
     @FXML
     void exit(ActionEvent event) {
+        var btns = new ButtonType[]{
+            new ButtonType("Yes", ButtonData.CANCEL_CLOSE),
+            new ButtonType("No", ButtonData.OK_DONE)
+        };
+        var alert = new Alert(Alert.AlertType.CONFIRMATION, "", btns);
+        
+        alert.setTitle("Exit");
+        alert.setHeaderText("Are you sure you want to exit the game?");
+        alert.setContentText("Game progress will be saved");
+        
+        alert.showAndWait()
+                .map(ButtonType::getButtonData)
+                .filter(bd -> bd == ButtonData.CANCEL_CLOSE)
+                .ifPresent(bd -> Platform.exit());
+        
         event.consume();
     }
 
