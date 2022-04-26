@@ -31,12 +31,15 @@ public interface FxmlUrl extends Supplier<URL> {
     public URL get();
 
     public enum Default implements FxmlUrl {
-        MAIN_VIEW("MainView.fxml"), SETTINGS_VIEW("SettingsView.fxml");
+
+        MAIN_VIEW("MainView.fxml"),
+        GAME_VIEW("GameView.fxml"),
+        SETTINGS_VIEW("SettingsView.fxml");
+
         private final String resource;
 
         private Default(String resource) {
             this.resource = resource;
-
         }
 
         @Override
