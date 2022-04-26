@@ -22,11 +22,18 @@
  */
 package com.github.idelstak.snakefx.controllers;
 
+import com.github.idelstak.snakefx.views.FxmlUrl.Default;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -65,6 +72,17 @@ public class MainViewController {
     @FXML
     void displaySettings(ActionEvent event) {
         settingsButton.setVisible(false);
+
+        Node settingsView = null;
+
+        try {
+            settingsView = FXMLLoader.load(Default.SETTINGS_VIEW.get());
+        } catch (IOException ex) {
+            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        mainPane.setCenter(Objects.requireNonNull(settingsView));
+
         event.consume();
     }
 
@@ -81,16 +99,16 @@ public class MainViewController {
             new ButtonType("No", ButtonData.OK_DONE)
         };
         var alert = new Alert(Alert.AlertType.CONFIRMATION, "", btns);
-        
+
         alert.setTitle("Exit");
         alert.setHeaderText("Are you sure you want to exit the game?");
         alert.setContentText("Game progress will be saved");
-        
+
         alert.showAndWait()
                 .map(ButtonType::getButtonData)
                 .filter(bd -> bd == ButtonData.CANCEL_CLOSE)
                 .ifPresent(bd -> Platform.exit());
-        
+
         event.consume();
     }
 
