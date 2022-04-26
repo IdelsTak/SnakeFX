@@ -23,17 +23,12 @@
 package com.github.idelstak.snakefx.controllers;
 
 import com.github.idelstak.snakefx.views.FxmlUrl.Default;
-import java.io.IOException;
+import com.github.idelstak.snakefx.views.FxmlView;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -67,35 +62,19 @@ public class MainViewController {
         exitButton.visibleProperty().bind(settingsButton.visibleProperty());
         backButton.visibleProperty().bind(settingsButton.visibleProperty().not());
         saveButton.visibleProperty().bind(exitButton.visibleProperty().not());
-        
+
         displayGameView();
     }
 
     private void displayGameView() {
-        Node gameView = null;
-        
-        try {
-            gameView = FXMLLoader.load(Default.GAME_VIEW.get());
-        } catch (IOException ex) {
-            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        mainPane.setCenter(Objects.requireNonNull(gameView));
+        mainPane.setCenter(new FxmlView().apply(Default.GAME_VIEW));
     }
 
     @FXML
     void displaySettings(ActionEvent event) {
         settingsButton.setVisible(false);
 
-        Node settingsView = null;
-
-        try {
-            settingsView = FXMLLoader.load(Default.SETTINGS_VIEW.get());
-        } catch (IOException ex) {
-            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        mainPane.setCenter(Objects.requireNonNull(settingsView));
+        mainPane.setCenter(new FxmlView().apply(Default.SETTINGS_VIEW));
 
         event.consume();
     }
@@ -103,9 +82,9 @@ public class MainViewController {
     @FXML
     void backToGameView(ActionEvent event) {
         settingsButton.setVisible(true);
-        
+
         displayGameView();
-        
+
         event.consume();
     }
 
