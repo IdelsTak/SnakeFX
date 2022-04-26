@@ -14,16 +14,16 @@ class SnakeViewBuilder implements Builder<Region> {
         var pane = new BorderPane();
 
         pane.setPrefSize(500, 400);
-        pane.setTop(setupTop());
+        pane.setTop(menu());
 
         return pane;
     }
 
-    private Node setupTop() {
-        var playBtn = new Button("Play");
-        var settingsBtn = new Button("Settings");
-        var exitBtn = new Button("Exit");
-        var toolBar = new ToolBar(playBtn, settingsBtn, exitBtn);
+    private Node menu() {
+        var play = new Button("Play");
+        var settings = new Button("Settings");
+        var exit = new Button("Exit");
+        var toolBar = new ToolBar(play, settings, exit);
 
         return toolBar;
     }
