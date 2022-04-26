@@ -22,6 +22,8 @@
  */
 package com.github.idelstak.snakefx;
 
+import com.github.idelstak.snakefx.controllers.SnakeMainViewController;
+import com.github.idelstak.snakefx.model.Settings;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -34,7 +36,7 @@ public class SnakeMain extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(new SnakeController().getView()));
+        stage.setScene(new Scene(new SnakeMainViewController(new Settings()).getView()));
         stage.setTitle("SnakeFX");
         stage.show();
     }
