@@ -24,10 +24,6 @@ package com.github.idelstak.snakefx;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
@@ -51,27 +47,22 @@ class SnakeViewBuilder implements Builder<Region> {
     private Node menu() {
         var play = new Button("Play");
 
-        var settings = new Button("Settings");
-        settings.setOnAction(evt -> {
+        var settingsBtn = new Button("Settings");
+        settingsBtn.setOnAction(evt -> {
 
-            var dialogPane = new DialogPane();
-            
-            dialogPane.setContent(new SettingsViewController().build());
-            dialogPane.getButtonTypes().setAll(
-                    new ButtonType[]{
-                        new ButtonType("Save", ButtonData.OK_DONE),
-                        new ButtonType("Return", ButtonData.CANCEL_CLOSE)
-                    }
-            );
+            var settings = new Settings();
 
-            var dialog = new Dialog<Void>();
+            settings.difficultyProperty().addListener((obs, ov, nv) -> {
+                System.out.printf("Observable: %s; old val: %s; new val: %s\n", obs, ov, nv);
+            });
 
-            dialog.setDialogPane(dialogPane);
-            dialog.showAndWait();
+            var dialog = new SettingsViewController(settings).build();
+
+            dialog.showAndWait().ifPresent(settings::setDifficulty);
 
         });
         var exit = new Button("Exit");
-        var toolBar = new ToolBar(play, settings, exit);
+        var toolBar = new ToolBar(play, settingsBtn, exit);
 
         return toolBar;
     }
