@@ -87,7 +87,6 @@ class SettingsViewController implements Builder<Dialog<Settings.Difficulty>> {
     }
 
     private Node content() {
-
         toggleGroup.getToggles().setAll(hardRB, mediumRB, easyRB);
 
         var difficultyBox = new HBox(hardRB, mediumRB, easyRB);
