@@ -67,6 +67,20 @@ public class MainViewController {
         exitButton.visibleProperty().bind(settingsButton.visibleProperty());
         backButton.visibleProperty().bind(settingsButton.visibleProperty().not());
         saveButton.visibleProperty().bind(exitButton.visibleProperty().not());
+        
+        displayGameView();
+    }
+
+    private void displayGameView() {
+        Node gameView = null;
+        
+        try {
+            gameView = FXMLLoader.load(Default.GAME_VIEW.get());
+        } catch (IOException ex) {
+            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        mainPane.setCenter(Objects.requireNonNull(gameView));
     }
 
     @FXML
@@ -87,8 +101,11 @@ public class MainViewController {
     }
 
     @FXML
-    void backToMain(ActionEvent event) {
+    void backToGameView(ActionEvent event) {
         settingsButton.setVisible(true);
+        
+        displayGameView();
+        
         event.consume();
     }
 
