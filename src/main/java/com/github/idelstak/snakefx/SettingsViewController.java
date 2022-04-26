@@ -66,6 +66,7 @@ class SettingsViewController implements Builder<Dialog<Settings.Difficulty>> {
         var dialogPane = dialog.getDialogPane();
 
         dialogPane.setContent(content());
+        dialog.setTitle("Game Settings");
         dialogPane.getButtonTypes().setAll(
                 new ButtonType[]{
                     new ButtonType("Save", ButtonBar.ButtonData.OK_DONE),
