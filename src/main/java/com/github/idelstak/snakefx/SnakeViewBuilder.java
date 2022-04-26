@@ -31,7 +31,14 @@ import javafx.util.Builder;
 
 class SnakeViewBuilder implements Builder<Region> {
 
-    SnakeViewBuilder() {
+    private final Settings settings;
+
+    SnakeViewBuilder(Settings settings) {
+        this.settings = settings;
+
+        this.settings.difficultyProperty().addListener((obs, ov, nv) -> {
+            System.out.printf("Observable: %s; old val: %s; new val: %s\n", obs, ov, nv);
+        });
     }
 
     @Override
@@ -49,15 +56,7 @@ class SnakeViewBuilder implements Builder<Region> {
 
         var settingsBtn = new Button("Settings");
         settingsBtn.setOnAction(evt -> {
-
-            var settings = new Settings();
-
-            settings.difficultyProperty().addListener((obs, ov, nv) -> {
-                System.out.printf("Observable: %s; old val: %s; new val: %s\n", obs, ov, nv);
-            });
-
             var dialog = new SettingsViewController(settings).build();
-
             dialog.showAndWait().ifPresent(settings::setDifficulty);
 
         });
