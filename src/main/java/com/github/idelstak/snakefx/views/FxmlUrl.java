@@ -41,7 +41,7 @@ public interface FxmlUrl extends Supplier<URL> {
 
         @Override
         public URL get() {
-            return FxmlUrl.class.getResource(resource);
+            return getClass().getResource(resource);
         }
     }
 
