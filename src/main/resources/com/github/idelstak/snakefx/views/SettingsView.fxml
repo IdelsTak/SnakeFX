@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox prefHeight="300.0" prefWidth="500.0" spacing="24.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox spacing="12.0" style="-fx-border-color: lightgray; -fx-border-radius: 24; -fx-border-width: 0.04em;">
+         <children>
+            <Label text="Difficulty level" />
+            <VBox spacing="6.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="Easy" />
+                  <RadioButton mnemonicParsing="false" text="Medium" />
+                  <RadioButton mnemonicParsing="false" text="Hard" />
+               </children>
+               <padding>
+                  <Insets left="24.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="10.0" layoutY="10.0" spacing="12.0" style="-fx-border-color: lightgray; -fx-border-radius: 24; -fx-border-width: 0.04em;">
+         <children>
+            <Label text="Key mapping" />
+            <HBox>
+               <children>
+                  <GridPane minHeight="-Infinity" prefWidth="400.0">
+                     <columnConstraints>
+                        <ColumnConstraints percentWidth="30.0" />
+                        <ColumnConstraints percentWidth="70.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                     </rowConstraints>
+                     <children>
+                        <Label contentDisplay="RIGHT" graphicTextGap="96.0" text="Up" />
+                        <Hyperlink text="W" GridPane.columnIndex="1" />
+                        <Label contentDisplay="RIGHT" graphicTextGap="96.0" text="Down" GridPane.rowIndex="1" />
+                        <Hyperlink text="S" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label contentDisplay="RIGHT" graphicTextGap="96.0" text="Left" GridPane.rowIndex="2" />
+                        <Hyperlink text="A" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label contentDisplay="RIGHT" graphicTextGap="96.0" text="Right" GridPane.rowIndex="3" />
+                        <Hyperlink text="D" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                     </children>
+                  </GridPane>
+                  <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets left="24.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </VBox>
+      <Region maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+   </children>
+   <padding>
+      <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+   </padding>
+</VBox>
