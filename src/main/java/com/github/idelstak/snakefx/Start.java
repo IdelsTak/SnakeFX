@@ -25,6 +25,7 @@ package com.github.idelstak.snakefx;
 public class Start {
 
     public static void main(String[] args) {
-        Main.main(args);
+        // Main.main(args);
+        SnakeMain.main(args);
     }
 }
