@@ -4,9 +4,10 @@ import javafx.scene.layout.Region;
 
 class SnakeController {
 
-    private final SnakeViewBuilder viewBuilder = new SnakeViewBuilder();
+    private final SnakeViewBuilder viewBuilder;
 
     SnakeController() {
+        this.viewBuilder = new SnakeViewBuilder(this::displaySettings);
     }
 
     Region getView() {
@@ -17,4 +18,7 @@ class SnakeController {
         return "SnakeFX";
     }
 
+    private void displaySettings(Runnable postDisplay) {
+        postDisplay.run();
+    }
 }
