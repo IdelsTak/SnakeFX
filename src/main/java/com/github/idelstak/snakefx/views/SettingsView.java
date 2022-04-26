@@ -31,6 +31,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -117,12 +118,12 @@ public class SettingsView extends DialogPane {
         right.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(right, Priority.ALWAYS);
 
-        var upBox = new HBox(up, new Text("W"));
-        var downBox = new HBox(down, new Text("S"));
-        var leftBox = new HBox(left, new Text("A"));
-        var rightBox = new HBox(right, new Text("D"));
+        var upBox = new HBox(up, new Hyperlink(settings.getUpKeyCode().toString()));
+        var downBox = new HBox(down, new Hyperlink(settings.getDownKeyCode().toString()));
+        var leftBox = new HBox(left, new Hyperlink(settings.getLeftKeyCode().toString()));
+        var rightBox = new HBox(right, new Hyperlink(settings.getRightKeyCode().toString()));
 
-        var controlsBox = new VBox(new Text("Controls"), upBox, downBox, leftBox, rightBox);
+        var controlsBox = new VBox(new Text("Controls (Click to change)"), upBox, downBox, leftBox, rightBox);
         controlsBox.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.SOLID, new CornerRadii(12), null)));
         controlsBox.setSpacing(6);
         controlsBox.setPadding(new Insets(6));
