@@ -28,7 +28,9 @@ import java.util.Objects;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Hyperlink;
@@ -118,7 +120,32 @@ public class SettingsView extends DialogPane {
         right.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(right, Priority.ALWAYS);
 
-        var upBox = new HBox(up, new Hyperlink(settings.getUpKeyCode().toString()));
+        var upLink = new Hyperlink();
+
+        upLink.textProperty().bind(Bindings.createStringBinding(() -> settings.getUpKeyCode().toString(), settings.upKeyCodeProperty()));
+
+        upLink.setOnAction(e -> {
+            var alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+            alert.setTitle("Modify UP key");
+            alert.setHeaderText("Replace \"%s\" as UP key?".formatted(upLink.getText()));
+            alert.setContentText("(Press any key to start)");
+            alert.getDialogPane().setOnKeyPressed(evt -> {
+                var code = evt.getCode();
+
+                settings.setUpKeyCode(code);
+                alert.setContentText("Will set \"%s\" as new UP key".formatted(code.toString()));
+            });
+
+            alert.showAndWait()
+                    .map(ButtonType::getButtonData)
+                    .filter(bd -> bd == ButtonData.OK_DONE)
+                    .ifPresent(bd -> {
+                        //settings.setUpKeyCode(KeyCode.valueOf(alert.getContentText()));
+                    });
+        });
+
+        var upBox = new HBox(up, upLink);
         var downBox = new HBox(down, new Hyperlink(settings.getDownKeyCode().toString()));
         var leftBox = new HBox(left, new Hyperlink(settings.getLeftKeyCode().toString()));
         var rightBox = new HBox(right, new Hyperlink(settings.getRightKeyCode().toString()));
