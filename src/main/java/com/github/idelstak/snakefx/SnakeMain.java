@@ -34,10 +34,8 @@ public class SnakeMain extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        var gameController = new SnakeController();
-        
-        stage.setScene(new Scene(gameController.getView()));
-        stage.setTitle(gameController.getTitle());
+        stage.setScene(new Scene(new SnakeController().getView()));
+        stage.setTitle("SnakeFX");
         stage.show();
     }
 
