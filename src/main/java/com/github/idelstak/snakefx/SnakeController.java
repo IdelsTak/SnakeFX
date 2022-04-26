@@ -29,7 +29,7 @@ class SnakeController {
     private final SnakeViewBuilder viewBuilder;
 
     SnakeController() {
-        this.viewBuilder = new SnakeViewBuilder();
+        this.viewBuilder = new SnakeViewBuilder(new Settings());
     }
 
     Region getView() {
