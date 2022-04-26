@@ -36,6 +36,7 @@
         <license.maven.plugin.version>4.2.rc2</license.maven.plugin.version>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
+        <javafx.version>18</javafx.version>
     </properties>
     <dependencies>
         <dependency>
@@ -47,12 +48,12 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17.0.2</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17.0.2</version>
+            <version>${javafx.version}</version>
         </dependency>
     </dependencies>
     <build>
