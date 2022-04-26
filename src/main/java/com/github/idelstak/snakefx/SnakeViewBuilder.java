@@ -22,9 +22,14 @@
  */
 package com.github.idelstak.snakefx;
 
-import java.util.function.Consumer;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
@@ -32,16 +37,12 @@ import javafx.util.Builder;
 
 class SnakeViewBuilder implements Builder<Region> {
 
-    private final Consumer<Runnable> settingsDisplay;
-    private BorderPane gamePane;
-
-    SnakeViewBuilder(Consumer<Runnable> settingsDisplay) {
-        this.settingsDisplay = settingsDisplay;
+    SnakeViewBuilder() {
     }
 
     @Override
     public Region build() {
-        gamePane = new BorderPane();
+        var gamePane = new BorderPane();
 
         gamePane.setPrefSize(500, 400);
         gamePane.setTop(menu());
@@ -54,14 +55,22 @@ class SnakeViewBuilder implements Builder<Region> {
 
         var settings = new Button("Settings");
         settings.setOnAction(evt -> {
-            settings.setDisable(true);
-            
-            gamePane.setCenter(new SettingsViewController().build());
 
-            settingsDisplay.accept(() -> {
-                settings.setDisable(false);
-                evt.consume();
-            });
+            var dialogPane = new DialogPane();
+            
+            dialogPane.setContent(new SettingsViewController().build());
+            dialogPane.getButtonTypes().setAll(
+                    new ButtonType[]{
+                        new ButtonType("Save", ButtonData.OK_DONE),
+                        new ButtonType("Return", ButtonData.CANCEL_CLOSE)
+                    }
+            );
+
+            var dialog = new Dialog<Void>();
+
+            dialog.setDialogPane(dialogPane);
+            dialog.showAndWait();
+
         });
         var exit = new Button("Exit");
         var toolBar = new ToolBar(play, settings, exit);
