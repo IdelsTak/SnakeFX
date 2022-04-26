@@ -22,9 +22,9 @@
  */
 package com.github.idelstak.snakefx;
 
-import com.github.idelstak.snakefx.controllers.SnakeMainViewController;
-import com.github.idelstak.snakefx.model.Settings;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -36,7 +36,9 @@ public class SnakeMain extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(new SnakeMainViewController(new Settings()).getView()));
+        var root = FXMLLoader.load(getClass().getResource("views/MainView.fxml"));
+
+        stage.setScene(new Scene((Parent) root));
         stage.setTitle("SnakeFX");
         stage.show();
     }
